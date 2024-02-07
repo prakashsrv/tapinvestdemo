@@ -12,7 +12,31 @@ class PurchaseScreen extends StatefulWidget {
 }
 
 class _PurchaseScreenState extends State<PurchaseScreen> {
+  int amt = 0;
   bool isFinished =false;
+
+  // Reactive variables
+  var enteredAmount = 0.0;
+  var totalReturns = 0.0;
+  var netYield = 13.11; // Assuming a fixed net yield for the example
+  var tenureDays = 61; // Assuming
+
+  double principal = 0.0;
+  double rate = 1.0; // Convert percentage to a decimal
+  double time = 1.0; // Convert tenure to years
+
+  void calculateTotalReturns() {
+    // Simple interest formula for demonstration: A = P(1 + rt)
+    // where P is the principal amount, r is the rate of interest per year, and t is time period in years
+     principal = enteredAmount;
+     rate = enteredAmount / 100; // Convert percentage to a decimal
+     time = enteredAmount /20; // Convert tenure to years
+
+    totalReturns = principal + principal /100;
+    setState(() {
+
+    });
+  }// a fixed tenure for the example
 
   @override
   Widget build(BuildContext context) {
@@ -39,6 +63,15 @@ class _PurchaseScreenState extends State<PurchaseScreen> {
             SizedBox(height: 20.0),
             Center(
               child: TextField(
+                  inputFormatters: [
+                    LengthLimitingTextInputFormatter(7),
+                  ],
+                onChanged: (String a){
+                  setState(() {
+                    enteredAmount = double.parse(a);
+                    calculateTotalReturns();
+                  });
+                },
                 decoration: InputDecoration(
                   border: OutlineInputBorder(),
                   labelText: 'Enter Amount',
@@ -57,7 +90,7 @@ class _PurchaseScreenState extends State<PurchaseScreen> {
                 ),
                 Spacer(),
                 Text(
-                  '₹ 56,555',
+                  '${totalReturns}',
                   style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold),
                 ),
               ],
@@ -73,7 +106,7 @@ class _PurchaseScreenState extends State<PurchaseScreen> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
                 Text('Net Yield IRR', style: TextStyle(fontSize: 12.0)),
-                Text('13.11 %', style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold)),
+                Text('${rate}', style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold)),
       
               ],
             ),
@@ -88,7 +121,7 @@ class _PurchaseScreenState extends State<PurchaseScreen> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
                 Text('Tenure', style: TextStyle(fontSize: 12.0)),
-                Text('61 days', style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold)),
+                Text('${time}', style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold)),
       
               ],
             ),
@@ -98,7 +131,7 @@ class _PurchaseScreenState extends State<PurchaseScreen> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
                 Text('Balance: ₹1,00,000', style: TextStyle(fontSize: 16.0)),
-                Text('Required: ₹0', style: TextStyle(fontSize: 16.0)),
+                Text( 'Required : ${enteredAmount+10}', style: TextStyle(fontSize: 16.0)),
               ],
             ),
             Spacer(),
