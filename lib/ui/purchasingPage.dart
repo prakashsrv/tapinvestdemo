@@ -5,6 +5,7 @@ import 'package:tapinvest1/utils/tapinvest_theme.dart';
 import 'dealDetailsPage.dart';
 import 'package:swipeable_button_view/swipeable_button_view.dart';
 import 'package:page_transition/page_transition.dart';
+import 'package:lottie/lottie.dart';
 
 class PurchaseScreen extends StatefulWidget {
   @override
@@ -209,37 +210,37 @@ class PaymentDonePage extends StatelessWidget {
     return Scaffold(
       backgroundColor: Colors.green[900], // Adjust color to match your design
       body: SafeArea(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
+        child: Stack(
           children: [
-            Spacer(),
-            Icon(
-              Icons.check_circle, // Use an icon that matches the check mark in your image
-              size: 100.0, // Adjust size accordingly
-              color: Colors.white,
-            ),
-            SizedBox(height: 24.0),
-            Text(
-              'Payment done',
-              style: TextStyle(
-                color: Colors.white,
-                fontSize: 24.0,
-                fontWeight: FontWeight.bold,
+            Container(
+                child: Lottie.asset('assets/image/flow1.json')),
+
+            Positioned(
+              top: 150.0,
+              right: 120.0,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  SizedBox(height: 24.0),
+                  Icon(
+                    Icons.check_circle, // Use an icon that matches the check mark in your image
+                    size: 100.0, // Adjust size accordingly
+                    color: Colors.white,
+                  ),
+                  SizedBox(height: 24.0),
+                  Text(
+                    'Payment done',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 12.0,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ],
               ),
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 48.0, vertical: 16.0),
-              child: Text(
-                'You are almost there! Do not leave this page, or press the back button.',
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                  color: Colors.white.withOpacity(0.7),
-                  fontSize: 16.0,
-                ),
-              ),
-            ),
-            Spacer(),
-            // ... Any other widgets you need
+            )
+
           ],
         ),
       ),
